@@ -1,0 +1,38 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* FORCE DARK MODE OVERRIDES */
+body,
+html,
+#root {
+	background-color: #000000; /* Perplexity Pure Black */
+	color: #e4e4e7; /* Soft White */
+	font-family: "Inter", sans-serif;
+	height: 100%;
+}
+
+h1,
+h2,
+h3,
+h4,
+.serif-font {
+	font-family: "Playfair Display", serif;
+}
+
+/* Custom Scrollbar to match */
+::-webkit-scrollbar {
+	width: 8px;
+}
+::-webkit-scrollbar-track {
+	background: #000;
+}
+::-webkit-scrollbar-thumb {
+	background: #333;
+	border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+	background: #555;
+}

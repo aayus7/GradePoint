@@ -1,69 +1,69 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Edit Course | GradePoint</title>
+		<title>Sign Up | GradePoint</title>
 		<style>
 			body {
 				font-family: sans-serif;
-				max-width: 800px;
-				margin: 0 auto;
-				padding: 20px;
-			}
-			form {
-				background: #f4f4f4;
-				padding: 20px;
-				margin-bottom: 20px;
-				/* Different border color to distinguish from "Add" form */
-				border-left: 5px solid #007bff;
+				padding: 50px;
+				text-align: center;
 			}
 			input {
 				padding: 10px;
-				margin-right: 10px;
+				margin: 5px;
 			}
-			button {
-				padding: 10px;
-				cursor: pointer;
-				background-color: #007bff;
-				color: white;
-				border: none;
-			}
-			button:hover {
-				background-color: #0056b3;
-			}
-			.cancel-link {
-				margin-left: 15px;
-				text-decoration: none;
-				color: #555;
-			}
-			.cancel-link:hover {
-				text-decoration: underline;
-				color: black;
+			.error {
+				color: red;
 			}
 		</style>
 	</head>
 	<body>
-		<h1>Edit Course</h1>
-
-		<!-- Form Action points to the Update Route we created -->
-		<form action="/courses/update/<%= course._id %>" method="POST">
-			<label>Subject:</label>
-			<input
-				type="text"
-				name="subject"
-				required
-				value="<%= course.subject %>"
-			/>
-
-			<label>Grade (%):</label>
-			<input
-				type="number"
-				name="grade"
-				required
-				value="<%= course.grade %>"
-			/>
-
-			<button type="submit">Update Course</button>
-			<a href="/courses" class="cancel-link">Cancel</a>
+		<form>
+			<h2>Sign Up</h2>
+			<div class="error"></div>
+			<label>Email</label><br />
+			<input type="text" name="email" required /><br />
+			<label>Password</label><br />
+			<input type="password" name="password" required /><br />
+			<button>Sign Up</button>
 		</form>
+		<p>Already have an account? <a href="/login">Log in</a></p>
+
+		<script>
+			const form = document.querySelector("form");
+			const errorDiv = document.querySelector(".error");
+
+			form.addEventListener("submit", async (e) => {
+				e.preventDefault();
+
+				// Reset errors
+				errorDiv.textContent = "";
+
+				const email = form.email.value;
+				const password = form.password.value;
+
+				try {
+					const res = await fetch("/signup", {
+						method: "POST",
+						body: JSON.stringify({ email, password }),
+						headers: { "Content-Type": "application/json" },
+					});
+
+					const data = await res.json();
+
+					if (data.error) {
+						// SHOW ERROR ON SCREEN
+						errorDiv.textContent = data.error;
+						alert("Error: " + data.error);
+					}
+					if (data.user) {
+						location.assign("/courses");
+					}
+				} catch (err) {
+					console.log(err);
+					alert("Something went wrong with the server connection.");
+				}
+			});
+		</script>
 	</body>
 </html>

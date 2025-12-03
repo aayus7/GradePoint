@@ -46,15 +46,19 @@ module.exports.signup_post = async (req, res) => {
 module.exports.login_post = async (req, res) => {
 	const { email, password } = req.body;
 
+	console.log(`--- LOGIN ATTEMPT ---`);
+	console.log(`Email provided: ${email}`);
+	console.log(`Password provided: ${password}`);
+
 	try {
 		const user = await User.login(email, password);
+		console.log("LOGIN SUCCESS: User found with ID:", user._id);
+
 		const token = createToken(user._id);
 		res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 });
-		// SUCCESS: Send user ID
-		res.status(200).json({ user: user._id });
+		res.status(200).json({ user: user._id, message: "Login successful" });
 	} catch (err) {
-		console.log("LOGIN ERROR:", err);
-		// FAILURE: Send nice error message
+		console.log("LOGIN FAILED:", err.message);
 		res.status(400).json({ error: "Incorrect email or password" });
 	}
 };
