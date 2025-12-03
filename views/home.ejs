@@ -1,2 +1,62 @@
-<h1>Welcome to GradePoint</h1>
-<a href="/courses">View Grades</a> <a href="/logout">Logout</a>
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Home | GradePoint</title>
+		<style>
+			body {
+				font-family: sans-serif;
+				text-align: center;
+				padding: 50px;
+			}
+			nav a {
+				margin: 0 10px;
+				padding: 10px 20px;
+				text-decoration: none;
+				color: white;
+				background: #333;
+				border-radius: 5px;
+			}
+			nav a:hover {
+				background: #555;
+			}
+			h1 {
+				color: #008000;
+			}
+			.user-email {
+				color: #666;
+				margin-bottom: 20px;
+				display: block;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>Welcome to GradePoint</h1>
+
+		<% if (user) { %>
+		<!-- SHOW THIS IF LOGGED IN -->
+		<span class="user-email">Logged in as: <b><%= user.email %></b></span>
+		<br /><br />
+		<nav>
+			<a href="/courses">View Grades</a>
+			<!-- The onclick event creates the popup -->
+			<a href="/logout" onclick="return confirmLogout()">Logout</a>
+		</nav>
+		<% } else { %>
+		<!-- SHOW THIS IF LOGGED OUT -->
+		<p>Please login to track your academic progress.</p>
+		<nav>
+			<a href="/login">Log In</a>
+			<a href="/signup">Sign Up</a>
+		</nav>
+		<% } %>
+
+		<script>
+			function confirmLogout() {
+				// This creates the popup
+				alert("Logged out successfully!");
+				// When user clicks "OK", the browser continues to /logout
+				return true;
+			}
+		</script>
+	</body>
+</html>

@@ -28,10 +28,26 @@
 				padding: 10px;
 				cursor: pointer;
 			}
-			.delete {
+			.course-actions {
 				float: right;
+				display: flex;
+				align-items: center;
+				gap: 12px;
+			}
+			.course-actions a {
+				text-decoration: none;
+			}
+			.delete {
 				color: red;
 				cursor: pointer;
+			}
+			.edit {
+				color: #007bff;
+				font-weight: 600;
+				text-transform: uppercase;
+			}
+			.edit:hover {
+				text-decoration: underline;
 			}
 		</style>
 	</head>
@@ -57,7 +73,12 @@
 		<div class="course-card">
 			<h3>
 				<%= course.subject %>: <%= course.grade %>%
-				<a class="delete" data-doc="<%= course._id %>">DELETE</a>
+				<span class="course-actions">
+					<a class="edit" href="/courses/edit/<%= course._id %>"
+						>Edit</a
+					>
+					<a class="delete" data-doc="<%= course._id %>">DELETE</a>
+				</span>
 			</h3>
 		</div>
 		<% }) %> <% } else { %>
