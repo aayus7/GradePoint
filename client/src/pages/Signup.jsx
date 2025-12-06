@@ -6,14 +6,16 @@ export default function Signup() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 
-	const handleSubmit = async () => {
+	// FIX 1: Accept event 'e'
+	const handleSubmit = async (e) => {
+		// FIX 2: Stop reload
+		e.preventDefault();
+
 		try {
 			const res = await axios.post("/signup", { email, password });
 
 			if (res.data.user) {
 				localStorage.setItem("userEmail", email);
-
-				// FIX: Force hard redirect
 				window.location.href = "/dashboard";
 			}
 		} catch (err) {
@@ -48,7 +50,6 @@ export default function Signup() {
 							placeholder="name@example.com"
 							autoComplete="new-password"
 							classNames={{
-								// FIX: Added 'flex items-center px-4'
 								inputWrapper:
 									"flex items-center px-4 border border-white/20 bg-transparent group-data-[focus=true]:!border-white group-data-[focus=true]:!ring-0 group-data-[focus=true]:!ring-offset-0 hover:border-white/40",
 								input: "text-white placeholder:text-gray-600 !outline-none",
@@ -69,7 +70,6 @@ export default function Signup() {
 							placeholder="Create password"
 							autoComplete="new-password"
 							classNames={{
-								// FIX: Added 'flex items-center px-4'
 								inputWrapper:
 									"flex items-center px-4 border border-white/20 bg-transparent group-data-[focus=true]:!border-white group-data-[focus=true]:!ring-0 group-data-[focus=true]:!ring-offset-0 hover:border-white/40",
 								input: "text-white placeholder:text-gray-600 !outline-none",
@@ -84,7 +84,7 @@ export default function Signup() {
 						size="lg"
 						fullWidth
 						className="bg-white text-black font-bold mt-8 shadow-lg hover:bg-gray-200 transition-all duration-300 ease-out hover:scale-105 hover:shadow-[0_0_15px_rgba(255,255,255,0.3)] active:scale-100 relative overflow-hidden group"
-						onPress={handleSubmit}
+						// FIX 3: Removed onPress
 					>
 						<span className="relative z-10">Sign Up</span>
 						<span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out"></span>
