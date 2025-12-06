@@ -8,10 +8,7 @@ export default function Signup() {
 	const [password, setPassword] = useState("");
 	const navigate = useNavigate();
 
-	const handleSubmit = async (e) => {
-		if (e) {
-			e.preventDefault();
-		}
+	const handleSubmit = async () => {
 		try {
 			const res = await axios.post("/signup", { email, password });
 
