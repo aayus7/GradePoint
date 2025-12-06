@@ -11,17 +11,20 @@ require("dotenv").config();
 const app = express();
 app.use(
 	cors({
-		origin: [
-			"http://localhost:5173", // Localhost
-			"https://gradepoint.vercel.app", // Your Vercel URL
-			"https://gradepoint.vercel.app/", // Your Vercel URL (Trailing slash version)
-			"https://www.gradepoint.vercel.app", // Your Vercel URL (www version)
-		],
-		credentials: true, // Allows cookies to be sent
-		methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Allow all standard methods
-		allowedHeaders: ["Content-Type", "Authorization"], // Allow standard headers
+		origin: (origin, callback) => {
+			// Allow requests with no origin (like mobile apps or curl requests)
+			if (!origin) return callback(null, true);
+			// Allow any origin
+			return callback(null, true);
+		},
+		credentials: true,
+		methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+		allowedHeaders: ["Content-Type", "Authorization"],
 	})
 );
+
+// Handle Preflight requests explicitly (Just in case)
+app.options("*", cors());
 const PORT = process.env.PORT || 3000;
 
 const dbURI =
