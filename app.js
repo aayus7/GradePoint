@@ -9,6 +9,19 @@ const { requireAuth, checkUser } = require("./middleware/authMiddleware");
 require("dotenv").config();
 
 const app = express();
+app.use(
+	cors({
+		origin: [
+			"http://localhost:5173", // Localhost
+			"https://gradepoint.vercel.app", // Your Vercel URL
+			"https://gradepoint.vercel.app/", // Your Vercel URL (Trailing slash version)
+			"https://www.gradepoint.vercel.app", // Your Vercel URL (www version)
+		],
+		credentials: true, // Allows cookies to be sent
+		methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Allow all standard methods
+		allowedHeaders: ["Content-Type", "Authorization"], // Allow standard headers
+	})
+);
 const PORT = process.env.PORT || 3000;
 
 const dbURI =
@@ -19,16 +32,6 @@ mongoose
 		app.listen(PORT, () => console.log(`Server running on port ${PORT}`))
 	)
 	.catch((err) => console.log(err));
-
-app.use(
-	cors({
-		origin: [
-			"http://localhost:5173",
-			"https://gradepoint.vercel.app", // <--- The EXACT URL from your error
-		],
-		credentials: true,
-	})
-);
 
 app.use(express.json());
 app.use(cookieParser());
