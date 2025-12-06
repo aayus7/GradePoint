@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import { Input, Button, Link } from "@heroui/react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 export default function Signup() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-	const navigate = useNavigate();
 
 	const handleSubmit = async () => {
 		try {
@@ -14,8 +12,9 @@ export default function Signup() {
 
 			if (res.data.user) {
 				localStorage.setItem("userEmail", email);
-				navigate("/dashboard");
-				window.location.reload();
+
+				// FIX: Force hard redirect
+				window.location.href = "/dashboard";
 			}
 		} catch (err) {
 			alert(err.response?.data?.error || "Signup failed");

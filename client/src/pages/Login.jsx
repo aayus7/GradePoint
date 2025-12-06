@@ -1,20 +1,17 @@
 import React, { useState } from "react";
 import { Input, Button, Link } from "@heroui/react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 export default function Login() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-	const navigate = useNavigate();
 
 	const handleSubmit = async () => {
 		try {
 			const res = await axios.post("/login", { email, password });
 			if (res.data.user) {
 				localStorage.setItem("userEmail", email);
-				navigate("/dashboard");
-				window.location.reload();
+				window.location.href = "/dashboard";
 			}
 		} catch (err) {
 			console.error(err);
