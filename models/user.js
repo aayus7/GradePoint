@@ -13,17 +13,21 @@ const userSchema = new mongoose.Schema({
 		required: true,
 		minlength: 6,
 	},
+	// NEW: Fields for password reset
+	resetPasswordToken: String,
+	resetPasswordExpires: Date,
 });
 
-
 userSchema.pre("save", async function () {
+	// If password is NOT modified, just return (exit the function)
+	if (!this.isModified("password")) return;
+
 	const salt = await bcrypt.genSalt();
 	this.password = await bcrypt.hash(this.password, salt);
 });
 
-
 userSchema.statics.login = async function (email, password) {
-	const user = await this.findOne({ email });
+	const user = await this.findOne({ email: email.toLowerCase() });
 	if (user) {
 		const auth = await bcrypt.compare(password, user.password);
 		if (auth) {

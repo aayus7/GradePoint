@@ -14,6 +14,8 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
 import EditCourse from "./pages/EditCourse";
+import ForgotPassword from "./pages/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword";
 
 // GLOBAL CONFIG
 axios.defaults.withCredentials = true;
@@ -63,6 +65,14 @@ function App() {
 						<Route path="/" element={<Home />} />
 						<Route path="/login" element={<Login />} />
 						<Route path="/signup" element={<Signup />} />
+						<Route
+							path="/forgot-password"
+							element={<ForgotPassword />}
+						/>
+						<Route
+							path="/reset-password/:token"
+							element={<ResetPassword />}
+						/>
 						<Route path="/dashboard" element={<Dashboard />} />
 						<Route path="/edit/:id" element={<EditCourse />} />
 					</Routes>
