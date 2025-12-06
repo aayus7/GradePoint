@@ -1,5 +1,7 @@
 import React from "react";
-import { Button, Link } from "@heroui/react";
+import { Button } from "@heroui/react";
+// FIX: Import Link from 'react-router-dom' so the 'to' prop works
+import { Link } from "react-router-dom";
 
 export default function Home() {
 	const user = localStorage.getItem("userEmail");
@@ -25,7 +27,7 @@ export default function Home() {
 					{user ? (
 						<Button
 							as={Link}
-							href="/dashboard"
+							to="/dashboard"
 							size="lg"
 							className="bg-white text-black font-medium rounded-full px-8 h-14 flex items-center justify-center"
 						>
@@ -33,18 +35,20 @@ export default function Home() {
 						</Button>
 					) : (
 						<>
-						<Button
-							as={Link}
-							href="/signup"
-							size="lg"
-							className="bg-white text-black font-medium rounded-full px-8 h-14 flex items-center justify-center transition-all duration-300 ease-out hover:scale-110 hover:shadow-[0_0_30px_rgba(255,255,255,0.5)] hover:shadow-white/50 active:scale-105 relative overflow-hidden group"
-						>
-							<span className="relative z-10">Start Tracking</span>
-							<span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out"></span>
-						</Button>
 							<Button
 								as={Link}
-								href="/login"
+								to="/signup"
+								size="lg"
+								className="bg-white text-black font-medium rounded-full px-8 h-14 flex items-center justify-center transition-all duration-300 ease-out hover:scale-110 hover:shadow-[0_0_30px_rgba(255,255,255,0.5)] hover:shadow-white/50 active:scale-105 relative overflow-hidden group"
+							>
+								<span className="relative z-10">
+									Start Tracking
+								</span>
+								<span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out"></span>
+							</Button>
+							<Button
+								as={Link}
+								to="/login"
 								size="lg"
 								variant="bordered"
 								className="text-white border-white/20 rounded-full px-8 h-14 flex items-center justify-center hover:bg-white/10"
