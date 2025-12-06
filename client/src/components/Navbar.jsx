@@ -38,7 +38,7 @@ export default function AppNavbar() {
 	return (
 		// FIX 1: Increased height to 'h-20' (80px) to fit the bigger logo
 		<Navbar
-			className="bg-black/50 backdrop-blur-md border-b border-white/10 h-20"
+			className="bg-black/50 backdrop-blur-md border-b border-white/10 h-20 relative"
 			maxWidth="xl"
 		>
 			{/* LEFT SIDE */}
@@ -53,17 +53,18 @@ export default function AppNavbar() {
 				</NavbarBrand>
 			</NavbarContent>
 
-			{/* CENTER - LOGO (BIGGER & CIRCLE) */}
-			<NavbarContent justify="center">
-				<Link href="/">
-					<img
-						src="/logo.jpg" // Make sure your file is here!
-						alt="Logo"
-						// FIX 2: h-14 w-14 (Larger), rounded-full (Circle), ring (Border)
-						className="h-20 w-20 rounded-full object-cover ring-2 ring-white/20 hover:ring-white/50 transition-all"
-					/>
-				</Link>
-			</NavbarContent>
+			{/* CENTER - LOGO (BIGGER & CIRCLE) - Absolutely positioned for true centering */}
+			<Link 
+				href="/"
+				className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 z-10"
+			>
+				<img
+					src="/logo.jpg" // Make sure your file is here!
+					alt="Logo"
+					// FIX 2: h-14 w-14 (Larger), rounded-full (Circle), ring (Border)
+					className="h-20 w-20 rounded-full object-cover ring-2 ring-white/20 hover:ring-white/50 transition-all"
+				/>
+			</Link>
 
 			{/* RIGHT SIDE */}
 			<NavbarContent justify="end" className="items-center">
@@ -120,9 +121,10 @@ export default function AppNavbar() {
 						<NavbarItem className="flex items-center">
 							<Link
 								href="/login"
-								className="text-sm text-gray-400 hover:text-white transition-colors"
+								className="text-sm text-gray-400 hover:text-white transition-all duration-300 px-4 py-2.5 rounded-lg hover:scale-105 relative group"
 							>
-								Login
+								<span className="relative z-10">Login</span>
+								<span className="absolute bottom-0 left-0 w-0 h-0.5 bg-white group-hover:w-full transition-all duration-300 ease-out"></span>
 							</Link>
 						</NavbarItem>
 						<NavbarItem className="flex items-center">
@@ -130,9 +132,10 @@ export default function AppNavbar() {
 								as={Link}
 								href="/signup"
 								size="sm"
-								className="bg-white text-black font-medium rounded-full px-6 flex items-center justify-center"
+								className="bg-white text-black font-medium rounded-full px-8 py-3 flex items-center justify-center transition-all duration-300 ease-out hover:scale-110 hover:shadow-[0_0_10px_rgba(255,255,255,0.2)] active:scale-105 relative overflow-hidden group"
 							>
-								Sign Up
+								<span className="relative z-10">Sign Up</span>
+								<span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out"></span>
 							</Button>
 						</NavbarItem>
 					</>

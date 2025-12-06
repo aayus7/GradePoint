@@ -125,10 +125,11 @@ export default function Dashboard() {
 				<Button
 					size="lg"
 					type="button"
-					className="bg-white text-black font-bold px-10 rounded-lg shadow-[0_0_15px_rgba(255,255,255,0.1)] hover:bg-gray-200"
+					className="bg-white text-black font-bold px-10 rounded-lg shadow-[0_0_15px_rgba(255,255,255,0.1)] hover:bg-gray-200 transition-all duration-300 ease-out hover:scale-[1.02] hover:shadow-[0_0_15px_rgba(255,255,255,0.2)] active:scale-100 relative overflow-hidden group"
 					onPress={(e) => handleSubmit(e)}
 				>
-					Add
+					<span className="relative z-10">Add</span>
+					<span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out"></span>
 				</Button>
 			</div>
 
