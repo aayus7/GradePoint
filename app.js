@@ -22,7 +22,10 @@ mongoose
 
 app.use(
 	cors({
-		origin: ["http://localhost:5173", "https://gradepoint.vercel.app"],
+		origin: [
+			"http://localhost:5173",
+			"https://gradepoint.vercel.app", // <--- The EXACT URL from your error
+		],
 		credentials: true,
 	})
 );
