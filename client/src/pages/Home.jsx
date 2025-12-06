@@ -29,9 +29,12 @@ export default function Home() {
 							as={Link}
 							to="/dashboard"
 							size="lg"
-							className="bg-white text-black font-medium rounded-full px-8 h-14 flex items-center justify-center"
+							className="bg-white text-black font-medium rounded-full px-8 h-14 flex items-center justify-center transition-all duration-300 ease-out hover:scale-110 hover:shadow-[0_0_30px_rgba(255,255,255,0.5)] hover:shadow-white/50 active:scale-105 relative overflow-hidden group"
 						>
-							Open Dashboard
+							<span className="relative z-10">
+								Open Dashboard
+							</span>
+							<span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out"></span>
 						</Button>
 					) : (
 						<>
